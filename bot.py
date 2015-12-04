@@ -16,7 +16,7 @@ from mockAsset import Asset
 from datetime import datetime, date, timedelta
 import currency
 
-bot = telebot.TeleBot('155736690:AAHRzm_oDQTzL5Sxua7-mO-e9davbK_FbTI')
+bot = telebot.TeleBot(config.token)
 
 @bot.message_handler(commands=['info', 'help'])
 def command_help(message):
@@ -24,7 +24,7 @@ def command_help(message):
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
-        markup = types.ReplyKeyboardMarkup()
+        markup = types.ReplyKeyboardMarkup(selective=False)
         markup.row('Траты')
         markup.row('Курсы', 'Пифы')
         msg = bot.send_message(message.chat.id, "Выберите раздел:", reply_markup=markup)
@@ -32,7 +32,7 @@ def handle_start(message):
 
 def on_section_click(message):
         if message.text == u'Курсы':
-                markup = types.ReplyKeyboardMarkup()
+                markup = types.ReplyKeyboardMarkup(selective=False)
                 markup.row('Назад')
                 markup.row('USD/RUB', 'EUR/RUB')
                 msg = bot.send_message(message.chat.id, "Выберите актив:", reply_markup=markup)
@@ -48,10 +48,16 @@ def on_currency_click(message):
         if message.text == u'Назад':
             handle_start(message)
         elif message.text == u'USD/RUB':
-            msg = bot.send_photo(message.chat.id, open('currencyPositive.jpg', 'rb'))
+            ast = Asset(1)
+            days, ticks = ast.get_timeseries("AdjClose")
+            currency.example("$", days, ticks)
+            msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
             bot.register_next_step_handler(msg, on_currency_click)
         elif message.text == u'EUR/RUB':
-            msg = bot.send_photo(message.chat.id, open('currencyNegative.jpg', 'rb'))
+            ast = Asset(2)
+            days, ticks = ast.get_timeseries("AdjClose")
+            currency.example("$", days, ticks)
+            msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
             bot.register_next_step_handler(msg, on_currency_click)
 
 @bot.message_handler(func=lambda message: True, content_types=['location'])
