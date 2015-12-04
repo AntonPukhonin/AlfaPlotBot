@@ -56,7 +56,7 @@ def on_currency_click(message):
         elif message.text == u'USD/RUB за год':
             createAndShowChart(1, False, "USD/RUB")
         elif message.text == u'EUR/RUB за год':
-            createAndShowChart(2, False, "USD/RUB")
+            createAndShowChart(2, False, "EUR/RUB")
 
 def createAndShowChart(index, isWeek, name):
     res = asset.get_asset_quotes(index)
