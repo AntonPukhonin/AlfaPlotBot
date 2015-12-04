@@ -38,7 +38,7 @@ def on_section_click(message):
                 msg = bot.send_message(message.chat.id, "Выберите актив:", reply_markup=markup)
                 bot.register_next_step_handler(msg, on_currency_click)
         elif message.text == u'Пифы':
-                msg = bot.send_photo(message.chat.id, open('graphics/filename.png', 'rb'))
+                msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
                 bot.register_next_step_handler(msg, on_section_click)
         elif message.text == u'Траты':
                 msg = bot.send_photo(message.chat.id, open('temp.jpg', 'rb'))
@@ -48,10 +48,10 @@ def on_currency_click(message):
         if message.text == u'Назад':
             handle_start(message)
         elif message.text == u'USD/RUB':
-            msg = bot.send_photo(message.chat.id, open('graphics/currencyPositive.jpg', 'rb'))
+            msg = bot.send_photo(message.chat.id, open('currencyPositive.jpg', 'rb'))
             bot.register_next_step_handler(msg, on_currency_click)
         elif message.text == u'EUR/RUB':
-            msg = bot.send_photo(message.chat.id, open('graphics/currencyNegative.jpg', 'rb'))
+            msg = bot.send_photo(message.chat.id, open('currencyNegative.jpg', 'rb'))
             bot.register_next_step_handler(msg, on_currency_click)
 
 @bot.message_handler(func=lambda message: True, content_types=['location'])
@@ -63,7 +63,7 @@ def go_philosophy(message):
     ast = Asset(1)
     days, ticks = ast.get_timeseries("AdjClose")
     currency.example("$", days, ticks)
-    bot.send_photo(message.chat.id, open('graphics/filename.png', 'rb'))
+    bot.send_photo(message.chat.id, open('filename.png', 'rb'))
     # bot.send_message(message.chat.id, '*В чём смысл жизни? Что я здесь делаю?*', parse_mode='Markdown')
 
 bot.polling()
