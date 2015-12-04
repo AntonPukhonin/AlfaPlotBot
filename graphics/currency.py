@@ -24,7 +24,7 @@ mpl.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib.cbook as cbook
-from mockAsset import Asset
+from asset import Asset
 from datetime import datetime, date, timedelta
 
 def drawGraph(days, values, filename):
