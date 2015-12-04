@@ -4,6 +4,7 @@
 import logging
 import traceback
 import json
+import psycopg2
 
 def get_connection(conn_name, path):
 	data = json.loads("""{
