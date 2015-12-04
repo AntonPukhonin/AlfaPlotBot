@@ -31,7 +31,7 @@ def get_asset_metadata(id):
 	conn.commit()
 	for row in cur:
 		conn.close()
-		return row[0], row[1]
+		return row[1], row[0]
 
 def get_asset_quotes(id):
 	conn = get_connection(CONN_NAME, PATH)
