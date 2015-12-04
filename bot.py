@@ -7,6 +7,10 @@ import os
 
 bot = telebot.TeleBot(config.token)
 
+@bot.message_handler(commands=['info', 'help'])
+def command_help(message):
+    bot.send_message(message.chat.id, "Для начала работы с ботом, введите /start")
+
 @bot.message_handler(commands=['start'])
 def handle_start(message):
         markup = types.ReplyKeyboardMarkup()
@@ -38,6 +42,14 @@ def on_currency_click(message):
         elif message.text == u'EUR/RUB':
             msg = bot.send_photo(message.chat.id, open('rooster.jpg', 'rb'))
             bot.register_next_step_handler(msg, on_currency_click)
+
+@bot.message_handler(func=lambda message: True, content_types=['location'])
+def listener_location(message):
+    bot.send_message(message.chat.id, "I's location")
+
+@bot.message_handler(func=lambda message: message.text == u'Философия')
+def go_philosophy(message):
+    bot.send_message(message.chat.id, 'В чём смысл жизни? Что я здесь делаю?')
 
 bot.polling()
 
