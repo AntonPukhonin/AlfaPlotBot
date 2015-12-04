@@ -24,7 +24,7 @@ mpl.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib.cbook as cbook
-from mockAsset import Asset
+from asset import Asset
 from datetime import datetime, date, timedelta
 from Tkinter import Tk, Canvas
 from PIL import ImageTk, Image, ImageDraw
@@ -80,6 +80,23 @@ def drawGraph(days, values, filename):
     fig.savefig(filename)
     plt.close(fig)
     return filename
+
+def example2(days, ticks):
+    currentDay = days[0];
+    rightDays = []
+    rightTicks = []
+
+    i = 0
+    for day in days:
+        if currentDay.toordinal() - 7 < day.toordinal():
+            rightDays.append(day)
+            rightTicks.append(ticks[i])
+        i = i + 1
+
+    for day in rightDays:
+        print day
+
+    example("exmaple", rightDays, rightTicks)
 
 def example(currencyTitle, days, ticks):
     size = (800,600)
