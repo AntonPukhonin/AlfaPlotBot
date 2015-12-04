@@ -103,7 +103,7 @@ def checkIncreasingFunction(ticks):
     last = ticks[len(ticks) - 1]
     return last > first
 
-def example(currencyTitle, days, ticks):
+def createChartWeek(currencyTitle, days, ticks):
     size = (800,600)
     fig, ax = plt.subplots()
     plt.plot(days, ticks)
