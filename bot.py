@@ -57,9 +57,9 @@ def on_currency_click(message):
     	    ticks = []
     	    for item in days:
                 	ticks.append(res.get(item).get('AdjClose'))
-                currency.example("USD/RUB", days, ticks)
-                msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
-                bot.register_next_step_handler(msg, on_currency_click)
+            currency.example("USD/RUB", days, ticks)
+            msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
+            bot.register_next_step_handler(msg, on_currency_click)
         elif message.text == u'EUR/RUB':
             res = asset.get_asset_quotes(2)
             days = sorted(res.keys())
