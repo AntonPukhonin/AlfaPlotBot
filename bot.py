@@ -12,7 +12,7 @@ sys.path.insert(0, path)
 path = os.getcwd() + "/graphics"
 sys.path.insert(0, path)
 
-from mockAsset import Asset
+import asset
 from datetime import datetime, date, timedelta
 import currency
 
@@ -31,6 +31,10 @@ def handle_start(message):
         bot.register_next_step_handler(msg, on_section_click)
 
 def on_section_click(message):
+	#ast = Asset(1)
+	asset_list = asset.get_assets_names()
+	print asset_list
+
         if message.text == u'Курсы':
                 markup = types.ReplyKeyboardMarkup(selective=False)
                 markup.row('Назад')
@@ -48,17 +52,24 @@ def on_currency_click(message):
         if message.text == u'Назад':
             handle_start(message)
         elif message.text == u'USD/RUB':
-            ast = Asset(1)
-            days, ticks = ast.get_timeseries("AdjClose")
-            currency.example("$", days, ticks)
+            res = asset.get_asset_quotes(1)
+	    days = sorted(res.keys())
+	    ticks = []
+	    for item in days:
+            	ticks.append(res.get(item).get('AdjClose'))
+            currency.example("USD/RUB", days, ticks)
             msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
             bot.register_next_step_handler(msg, on_currency_click)
         elif message.text == u'EUR/RUB':
-            ast = Asset(2)
-            days, ticks = ast.get_timeseries("AdjClose")
-            currency.example("$", days, ticks)
+            res = asset.get_asset_quotes(2)
+            days = sorted(res.keys())
+            ticks = []
+            for item in days:
+            	ticks.append(res.get(item).get('AdjClose'))
+            currency.example("EUR/RUB", days, ticks)
             msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
             bot.register_next_step_handler(msg, on_currency_click)
+
 
 @bot.message_handler(func=lambda message: True, content_types=['location'])
 def listener_location(message):
@@ -72,7 +83,6 @@ def go_philosophy(message):
     bot.send_photo(message.chat.id, open('filename.png', 'rb'))
     # bot.send_message(message.chat.id, '*В чём смысл жизни? Что я здесь делаю?*', parse_mode='Markdown')
 
-bot.polling()
 
 if __name__ == '__main__':
         os.environ['http_proxy'] = 'http://datahub-20:8888'

@@ -7,11 +7,35 @@ import json
 import psycopg2
 
 def get_connection(conn_name, path):
-	try:
-		with open(path) as data_file:
-			data = json.load(data_file)
-	except:
-		logging.error("JSON config not found")
+	data = json.loads("""{
+	"connections":
+                {
+                "RBPROD":       {
+                        "connection_name": "RBPROD",
+                        "connection_type": "oracle",
+                        "connection_IP": "bi1db8",
+                        "connection_port": "1521",
+                        "connection_user": "***",
+                        "connection_pwd": "qwerty12",
+                        "connection_service_name": "RBPROD_TAF"
+                        },
+                "datahub21": {
+                        "connection_name": "datahub21",
+                        "connection_type": "postgresql",
+                        "connection_IP": "datahub-21",
+                        "connection_dbname": "db",
+                        "connection_port": "5432",
+                        "connection_user": "datahub",
+                        "connection_pwd": "datahub"
+                        }
+                }
+	}""")
+
+#	try:
+#		with open(path) as data_file:
+#			data = json.load(data_file)
+#	except:
+#		logging.error("JSON config not found")
 
 	connection_parameters = ""
 	try:
