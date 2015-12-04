@@ -5,8 +5,8 @@ import logging
 import traceback
 from datetime import datetime, date, timedelta
 from utils import get_connection
-from config import PATH
-from config import CONN_NAME
+PATH ="./config.json"
+CONN_NAME = "datahub21"
 
 def get_assets_names():
 	#return dict {symb: [id, name]}
