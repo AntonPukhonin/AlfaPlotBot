@@ -108,7 +108,7 @@ def example(currencyTitle, days, ticks):
     fig.savefig("filename", transparent=True)
     plt.close(fig)
 
-    background = Image.open("currencyNegative.jpg")
+    background = Image.open("currencyNegative.png")
     background = background.resize(size, Image.ANTIALIAS)
     overlay = Image.open("filename.png")
     mask = Image.new("RGBA", size, color=(255,255,255,150))
