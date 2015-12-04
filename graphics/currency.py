@@ -93,7 +93,3 @@ def example(currencyTitle, days, ticks):
     fig.savefig("filename")
     plt.close(fig)
     print ("success")
-
-ast = Asset(1)
-days, ticks = ast.get_timeseries("AdjClose")
-example("$", days, ticks)
