@@ -68,7 +68,7 @@ def createAndShowChart(index, isWeek, name):
     if (isWeek):
         currency.createChartWeek("EUR/RUB", days, ticks)
     else:
-        currency.example("EUR/RUB", days, ticks)
+        currency.createChart("EUR/RUB", days, ticks)
     msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
     bot.register_next_step_handler(msg, on_currency_click)
 
