@@ -1,0 +1,15 @@
+CREATE TABLE exprm.hist_quotes 
+	(asset_id INTEGER NOT NULL, 
+	dayref timestamp without time zone, 
+	adj_close numeric(14,2) NOT NULL, 
+	vol int NOT NULL, 
+	primary key (asset_id, dayref)
+)
+
+CREATE TABLE exprm.assets
+	(asset_id INTEGER NOT NULL, 
+	symb character varying(5) NOT NULL, 
+	name character varying(20) NOT NULL, 
+	conn_name character varying(20) NOT NULL,
+	CONSTRAINT assets_pkey PRIMARY KEY (asset_id)
+)
