@@ -26,6 +26,8 @@ import matplotlib.dates as mdates
 import matplotlib.cbook as cbook
 from mockAsset import Asset
 from datetime import datetime, date, timedelta
+from Tkinter import Tk, Canvas
+from PIL import ImageTk, Image, ImageDraw
 
 def drawGraph(days, values, filename):
     years = mdates.YearLocator()   # every year
@@ -80,20 +82,25 @@ def drawGraph(days, values, filename):
     return filename
 
 def example(currencyTitle, days, ticks):
+    size = (800,600)
     fig, ax = plt.subplots()
     plt.plot(days, ticks)
     plt.xlabel(currencyTitle)
-
-    # datafile = cbook.get_sample_data(path + '/currencyPositive.jpg')
-    # img = plt.imread(datafile)
-    # plt.scatter(x,y,zorder=1)
-    # plt.imshow(img, zorder=0, extent=[0.5, 8.0, 1.0, 7.0])
-
     fig.autofmt_xdate()
-    fig.savefig("filename")
+
+    fig.savefig("filename", transparent=True)
     plt.close(fig)
+
+    background = Image.open("currencyNegative.jpg")
+    background = background.resize(size, Image.ANTIALIAS)
+    overlay = Image.open("filename.png")
+    mask = Image.new("RGBA", size, color=(255,255,255,150))
+
+    background.paste(mask, (0, 0), mask)
+    background.paste(overlay, (0, 0), overlay)
+    background.save("filename.png","PNG")
     print ("success")
 
 ast = Asset(1)
 days, ticks = ast.get_timeseries("AdjClose")
-example("$", days, ticks)
+example("USD/RUR", days, ticks)
