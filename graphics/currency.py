@@ -84,10 +84,10 @@ def example(currencyTitle, days, ticks):
     plt.plot(ticks, days)
     plt.xlabel(currencyTitle)
 
-    datafile = cbook.get_sample_data('currencyPositive.jpg')
-    img = imread(datafile)
-    plt.scatter(x,y,zorder=1)
-    plt.imshow(img, zorder=0, extent=[0.5, 8.0, 1.0, 7.0])
+    # datafile = cbook.get_sample_data('currencyPositive.jpg')
+    # img = imread(datafile)
+    # plt.scatter(x,y,zorder=1)
+    # plt.imshow(img, zorder=0, extent=[0.5, 8.0, 1.0, 7.0])
 
     fig.autofmt_xdate()
     fig.savefig("filename")
