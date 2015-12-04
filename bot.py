@@ -16,7 +16,7 @@ from mockAsset import Asset
 from datetime import datetime, date, timedelta
 import currency
 
-bot = telebot.TeleBot('155736690:AAHRzm_oDQTzL5Sxua7-mO-e9davbK_FbTI')
+bot = telebot.TeleBot(config.token)
 
 @bot.message_handler(commands=['info', 'help'])
 def command_help(message):
@@ -68,11 +68,9 @@ def listener_location(message):
 def go_philosophy(message):
     ast = Asset(1)
     days, ticks = ast.get_timeseries("AdjClose")
-    currency.example(days, ticks)
+    currency.example2(days, ticks)
     bot.send_photo(message.chat.id, open('filename.png', 'rb'))
     # bot.send_message(message.chat.id, '*В чём смысл жизни? Что я здесь делаю?*', parse_mode='Markdown')
-
-bot.polling()
 
 if __name__ == '__main__':
         os.environ['http_proxy'] = 'http://datahub-20:8888'
