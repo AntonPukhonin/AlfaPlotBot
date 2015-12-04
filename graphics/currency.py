@@ -98,6 +98,11 @@ def example2(days, ticks):
 
     example("exmaple", rightDays, rightTicks)
 
+def checkIncreasingFunction(ticks):
+    first = ticks[0]
+    last = ticks[ticks.size]
+    return last > first
+
 def example(currencyTitle, days, ticks):
     size = (800,600)
     fig, ax = plt.subplots()

@@ -53,13 +53,13 @@ def on_currency_click(message):
             handle_start(message)
         elif message.text == u'USD/RUB':
             res = asset.get_asset_quotes(1)
-	    days = sorted(res.keys())
-	    ticks = []
-	    for item in days:
-            	ticks.append(res.get(item).get('AdjClose'))
-            currency.example("USD/RUB", days, ticks)
-            msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
-            bot.register_next_step_handler(msg, on_currency_click)
+    	    days = sorted(res.keys())
+    	    ticks = []
+    	    for item in days:
+                	ticks.append(res.get(item).get('AdjClose'))
+                currency.example("USD/RUB", days, ticks)
+                msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
+                bot.register_next_step_handler(msg, on_currency_click)
         elif message.text == u'EUR/RUB':
             res = asset.get_asset_quotes(2)
             days = sorted(res.keys())
