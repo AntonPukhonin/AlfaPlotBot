@@ -14,8 +14,8 @@ and num2date
 import os
 import sys
 
-path = os.getcwd() + "/rawdata"
-sys.path.insert(0, path)
+path = os.getcwd()
+sys.path.insert(0, path + "/rawdata")
 
 import datetime
 import numpy as np
@@ -81,11 +81,11 @@ def drawGraph(days, values, filename):
 
 def example(currencyTitle, days, ticks):
     fig, ax = plt.subplots()
-    plt.plot(ticks, days)
+    plt.plot(days, ticks)
     plt.xlabel(currencyTitle)
 
-    # datafile = cbook.get_sample_data('currencyPositive.jpg')
-    # img = imread(datafile)
+    # datafile = cbook.get_sample_data(path + '/currencyPositive.jpg')
+    # img = plt.imread(datafile)
     # plt.scatter(x,y,zorder=1)
     # plt.imshow(img, zorder=0, extent=[0.5, 8.0, 1.0, 7.0])
 
