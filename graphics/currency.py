@@ -14,7 +14,8 @@ and num2date
 import os
 import sys
 
-path = os.path.dirname(os.getcwd()) + "/rawdata"
+path = os.getcwd() + "/rawdata"
+print path
 sys.path.insert(0, path)
 
 import datetime
