@@ -4,7 +4,6 @@
 import logging
 import traceback
 import json
-import cx_Oracle
 import psycopg2
 
 def get_connection(conn_name, path):
@@ -21,7 +20,8 @@ def get_connection(conn_name, path):
 		logging.error("Connection  is not configured: " + traceback.format_exc())
 
 	if connection_parameters["connection_type"] == "oracle":
-		conn_string = (connection_parameters["connection_user"] + "/" + connection_parameters["connection_pwd"] + "@" + 
+		import cx_Oracle
+		conn_string = (connection_parameters["connection_user"] + "/" + connection_parameters["connection_pwd"] + "@" +
 			connection_parameters["connection_IP"] + ":" + connection_parameters["connection_port"] + "/" + connection_parameters["connection_service_name"]);
 		try:
 			conn = cx_Oracle.connect(conn_string)
@@ -29,8 +29,8 @@ def get_connection(conn_name, path):
 		except:
 			logging.error(traceback.format_exc());
 	if connection_parameters["connection_type"] == "postgresql":
-		conn_string_pg = ("host='" + connection_parameters["connection_IP"] + "' port='" + connection_parameters["connection_port"] 
-			+ "' dbname='" + connection_parameters["connection_dbname"] + "' user='" 
+		conn_string_pg = ("host='" + connection_parameters["connection_IP"] + "' port='" + connection_parameters["connection_port"]
+			+ "' dbname='" + connection_parameters["connection_dbname"] + "' user='"
 			+ connection_parameters["connection_user"] + "' password='" + connection_parameters["connection_pwd"] + "'")
 		try:
 			conn=psycopg2.connect(conn_string_pg)
