@@ -100,7 +100,7 @@ def example2(days, ticks):
 
 def checkIncreasingFunction(ticks):
     first = ticks[0]
-    last = ticks[ticks.size]
+    last = ticks[len(ticks) - 1]
     return last > first
 
 def example(currencyTitle, days, ticks):
