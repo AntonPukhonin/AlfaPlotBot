@@ -81,7 +81,7 @@ def drawGraph(days, values, filename):
     plt.close(fig)
     return filename
 
-def example2(days, ticks):
+def example2(currencyTitle, days, ticks):
     currentDay = days[0];
     rightDays = []
     rightTicks = []
@@ -96,7 +96,7 @@ def example2(days, ticks):
     for day in rightDays:
         print day
 
-    example("exmaple", rightDays, rightTicks)
+    example(currencyTitle, rightDays, rightTicks)
 
 def checkIncreasingFunction(ticks):
     first = ticks[0]
