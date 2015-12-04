@@ -79,6 +79,15 @@ def drawGraph(days, values, filename):
     plt.close(fig)
     return filename
 
+def example2(days, ticks):
+    currenctDay = days[0];
+    rightDays = days
+
+    for day in days:
+        print day
+
+    example("exmaple", rightDays, ticks)
+
 def example(currencyTitle, days, ticks):
     fig, ax = plt.subplots()
     plt.plot(days, ticks)
