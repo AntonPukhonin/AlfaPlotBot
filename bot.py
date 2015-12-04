@@ -79,7 +79,7 @@ def listener_location(message):
 def go_philosophy(message):
     ast = Asset(1)
     days, ticks = ast.get_timeseries("AdjClose")
-    currency.example("$", days, ticks)
+    currency.example2(days, ticks)
     bot.send_photo(message.chat.id, open('filename.png', 'rb'))
     # bot.send_message(message.chat.id, '*В чём смысл жизни? Что я здесь делаю?*', parse_mode='Markdown')
 
