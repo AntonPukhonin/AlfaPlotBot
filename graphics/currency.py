@@ -15,7 +15,6 @@ import os
 import sys
 
 path = os.getcwd() + "/rawdata"
-print path
 sys.path.insert(0, path)
 
 import datetime
@@ -96,5 +95,5 @@ def example(currencyTitle, days, ticks):
     print ("success")
 
 ast = Asset(1)
-days, ticks = ast.get_timeseries("Adj_Close")
+days, ticks = ast.get_timeseries("AdjClose")
 example("$", days, ticks)
