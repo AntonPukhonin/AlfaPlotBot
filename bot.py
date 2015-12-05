@@ -38,7 +38,7 @@ def on_section_click(message):
         if message.text == u'Курсы валют':
             markup = types.ReplyKeyboardMarkup(selective=False)
             markup.row('Назад')
-            markup.row('USD/RUB за год', 'EUR/RUB за неделю')
+            markup.row('USD/RUB за неделю', 'EUR/RUB за неделю')
             markup.row('USD/RUB за год', 'EUR/RUB за год')
             msg = bot.send_message(message.chat.id, "Выберите актив:", reply_markup=markup)
             bot.register_next_step_handler(msg, on_currency_click)
@@ -62,24 +62,24 @@ def on_currency_click(message):
         if message.text == u'Назад':
             handle_start(message)
         elif message.text == u'EUR/RUB за неделю':
-            createAndShowChart(message, 2, True, "EUR/RUB")
+            createAndShowChart(message, 2, True, "EUR/RUB", on_currency_click)
         elif message.text == u'EUR/RUB за год':
-            createAndShowChart(message, 2, False, "EUR/RUB")
+            createAndShowChart(message, 2, False, "EUR/RUB", on_currency_click)
         elif message.text == u'USD/RUB за неделю':
-            createAndShowChart(message, 1, True, "EUR/RUB")
+            createAndShowChart(message, 1, True, "EUR/RUB", on_currency_click)
         elif message.text == u'USD/RUB за год':
-            createAndShowChart(message, 1, False, "EUR/RUB")
+            createAndShowChart(message, 1, False, "EUR/RUB", on_currency_click)
 
 def on_stock_click(message):
         if message.text == u'Назад':
             handle_start(message)
         elif message.text == u'SBER за неделю':
-            createAndShowChart(message, 1, True, "SBER")
+            createAndShowChart(message, 1, True, "SBER", on_stock_click)
         elif message.text == u'SBER за год':
-            createAndShowChart(message, 1, False, "SBER")
+            createAndShowChart(message, 1, False, "SBER", on_stock_click)
 
 
-def createAndShowChart(message, index, isWeek, title):
+def createAndShowChart(message, index, isWeek, title, handle):
     res = asset.get_asset_quotes(index)
     days = sorted(res.keys())
     ticks = []
@@ -94,7 +94,7 @@ def createAndShowChart(message, index, isWeek, title):
         currency.createChart2(title, days, ticks)
 
     msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
-    bot.register_next_step_handler(msg, on_currency_click)
+    bot.register_next_step_handler(msg, handle)
 
 
 @bot.message_handler(func=lambda message: True, content_types=['location'])
