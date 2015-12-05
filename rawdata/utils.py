@@ -15,7 +15,7 @@ def get_connection(conn_name, path):
                         "connection_type": "oracle",
                         "connection_IP": "bi1db8",
                         "connection_port": "1521",
-                        "connection_user": "***",
+                        "connection_user": "LKULIGIN",
                         "connection_pwd": "qwerty12",
                         "connection_service_name": "RBPROD_TAF"
                         },

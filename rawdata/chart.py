@@ -49,6 +49,8 @@ def get_chart(city_id, age_id):
 	conn.commit()
 	res = {}
 	for row in cur:
+		print row[2]
+	        print row[3]
 		res[row[2]] = row[3]
 	conn.close()
 	return res
