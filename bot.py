@@ -43,7 +43,9 @@ def on_section_click(message):
             msg = bot.send_message(message.chat.id, "Выберите актив:", reply_markup=markup)
             bot.register_next_step_handler(msg, on_currency_click)
         elif message.text == u'Финансы':
-            expen, categories = chart.get_chart(1, 20)
+            city = random.randint(1,3)
+            age = random.randint(10,60, 10)
+            expen, categories = chart.get_chart(city, age)
             user, image = magicNumber.createMagicData(expen, categories)
 
             expenses.createChart(categories, expen, user, image)
