@@ -45,15 +45,13 @@ def get_ages(city_id):
 def get_chart(city_id, age_id):
 	conn = get_connection(CONN_NAME, PATH)
 	cur = conn.cursor()
-	cur.execute("SELECT * FROM EXPM_BALANCES WHERE AGE = " + str(age_id) + "AND REGION_ = " + str(city_id) + " ORDER BY 4 desc")
+	cur.execute("SELECT * FROM EXPM_MCCRATE WHERE AGE = " + str(age_id) + "AND REGION_ = " + str(city_id) + " ORDER BY 4 desc")
 	conn.commit()
-	res = {}
+	mccrate = []
+	mccname = []
 	for row in cur:
-		print row[2]
-	        print row[3]
-		res[row[2]] = row[3]
+		mccrate.append(row[3])
+		mccname.append(row[0])
+#		res[row[2]] = row[3]
 	conn.close()
-	return res
-
-
-
+	return mccrate, mccname
