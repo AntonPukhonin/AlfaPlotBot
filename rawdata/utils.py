@@ -15,8 +15,8 @@ def get_connection(conn_name, path):
                         "connection_type": "oracle",
                         "connection_IP": "bi1db8",
                         "connection_port": "1521",
-                        "connection_user": "LKULIGIN",
-                        "connection_pwd": "qwerty12",
+                        "connection_user": "",
+                        "connection_pwd": "",
                         "connection_service_name": "RBPROD_TAF"
                         },
                 "datahub21": {
@@ -25,8 +25,8 @@ def get_connection(conn_name, path):
                         "connection_IP": "datahub-21",
                         "connection_dbname": "db",
                         "connection_port": "5432",
-                        "connection_user": "datahub",
-                        "connection_pwd": "datahub"
+                        "connection_user": "",
+                        "connection_pwd": ""
                         }
                 }
 	}""")
