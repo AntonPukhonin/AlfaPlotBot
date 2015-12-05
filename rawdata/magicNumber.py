@@ -3,11 +3,8 @@ import os
 import sys
 
 def getRandomNumber(original):
-    print original
     random.seed()
-    print original * 0.1
-    offset = round(original * 0.1)
-    print offset
+    offset = original * 0.3
     rightOriginal = original
 
     tempRandom = random.random()
@@ -43,22 +40,22 @@ def createMagicData(original, categoryName):
     return magicData
 
 def getImageFileName(categoryName):
-    if categoryName == '1':
-        return "1.png"
-    elif categoryName == '2':
-        return "2.png"
-    elif categoryName == '3':
-        return "3.png"
-    elif categoryName == '4':
-        return "4.png"
-    elif categoryName == '5':
+    if categoryName == 'Household appliance stores':
         return "5.png"
-    elif categoryName == '6':
-        return "6.png"
-    elif categoryName == '7':
+    elif categoryName == 'Airlines, Air Carriers':
+        return "13.png"
+    elif categoryName == 'Electronic Sales':
+        return "12.png"
+    elif categoryName == "Men's and ladies's clothing":
+        return "4.png"
+    elif categoryName == 'Eating places,Restaurants':
         return "7.png"
-    elif categoryName == '8':
-        return "8.png"
+    elif categoryName == 'Medical services':
+        return "9.png"
+    elif categoryName == 'Furniture,home furnishings':
+        return "10.png"
+    elif categoryName == 'Cosmetic stores':
+        return "16.png"
 
 def test():
     random.seed()

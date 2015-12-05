@@ -45,7 +45,7 @@ def get_ages(city_id):
 def get_chart(city_id, age_id):
 	conn = get_connection(CONN_NAME, PATH)
 	cur = conn.cursor()
-	cur.execute("SELECT * FROM EXPM_MCCRATE WHERE AGE = " + str(age_id) + "AND REGION_ = " + str(city_id) + " ORDER BY 4 desc")
+	cur.execute("SELECT * FROM EXPM_MCCRATE WHERE AGE = " + str(age_id) + "AND REGION_ = " + str(city_id) + " ORDER BY 4 asc")
 	conn.commit()
 	mccrate = []
 	mccname = []
