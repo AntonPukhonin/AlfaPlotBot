@@ -63,13 +63,15 @@ def createAndShowChart(message, index, isWeek, title):
     ticks = []
     for item in days:
         ticks.append(res.get(item).get('AdjClose'))
-
+    print isWeek
     if isWeek == True:
         currency.createChartWeek(title, days, ticks)
+        print "succes"
     else:
         currency.createChart(title, days, ticks)
+	print "Fail"
 
-    msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
+    msg = bot.send_photo(message.chat.id, open('filename123.png', 'rb'))
     bot.register_next_step_handler(msg, on_currency_click)
 
 
