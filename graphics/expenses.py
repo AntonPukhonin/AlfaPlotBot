@@ -39,7 +39,7 @@ def createChart(categories, average, user):
     overlay.putdata(newData)
 
     background = Image.new("RGBA", size, color=(255,255,255, 255))
-    background.paste(image, (193, 60), image)xw
+    background.paste(image, (193, 60), image)
     background.paste(overlay, (0, 0), overlay)
     background.save("filename.png","PNG")
     print ("success")
@@ -53,7 +53,7 @@ def createPlot(categories, average, user):
     index = np.arange(groups)
     bar_width = 0.35
 
-    opacity = 0.4
+    opacity = 0.6
     error_config = {'ecolor': '0.3'}
 
     rects1 = plt.bar(index, average, bar_width,
