@@ -76,7 +76,7 @@ def createAndShowChart(message, index, isWeek, title):
     else:
         currency.createChart2(title, days, ticks)
 
-    msg = bot.send_photo(message.chat.id, open('filename123.png', 'rb'))
+    msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
     bot.register_next_step_handler(msg, on_currency_click)
 
 
