@@ -82,7 +82,7 @@ def drawGraph(days, values, filename):
     return filename
 
 def createChartWeek(title, days, ticks):
-    currentDay = days[0];
+    currentDay = days[len(days) - 1];
     rightDays = []
     rightTicks = []
 
@@ -101,6 +101,9 @@ def checkIncreasingFunction(ticks):
     return last > first
 
 def createChart(currencyTitle, days, ticks):
+    createChart(currencyTitle, days, ticks, False)
+
+def createChart(currencyTitle, days, ticks, isMagic):
     size = (800, 600)
     fig, ax = plt.subplots()
     plt.plot(days, ticks)
@@ -110,10 +113,10 @@ def createChart(currencyTitle, days, ticks):
     fig.savefig("filename", transparent=True)
     plt.close(fig)
 
-    if checkIncreasingFunction(ticks):
-        background = Image.open("currencyPositive.png")
-    else:
+    if isMagic:
         background = Image.open("currencyNegative.png")
+    else:
+        background = Image.open("currencyPositive.png")
 
     background = background.resize(size, Image.ANTIALIAS)
     overlay = Image.open("filename.png")

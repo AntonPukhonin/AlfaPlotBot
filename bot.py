@@ -66,6 +66,8 @@ def createAndShowChart(message, index, isWeek, title):
 
     if isWeek == True:
         currency.createChartWeek(title, days, ticks)
+    elif index == 1:#HardCode
+        currency.createChartWeek(title, days, ticks, TRUE)
     else:
         currency.createChart(title, days, ticks)
 
