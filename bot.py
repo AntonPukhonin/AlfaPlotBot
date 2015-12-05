@@ -5,6 +5,7 @@ from telebot import types
 import config
 import os
 import sys
+import random
 
 path = os.getcwd() + "/rawdata"
 sys.path.insert(0, path)
@@ -43,12 +44,13 @@ def on_section_click(message):
             msg = bot.send_message(message.chat.id, "Выберите актив:", reply_markup=markup)
             bot.register_next_step_handler(msg, on_currency_click)
         elif message.text == u'Финансы':
+            random.seed()
             city = random.randint(1,3)
             age = random.randint(10,60, 10)
             expen, categories = chart.get_chart(city, age)
             user, image = magicNumber.createMagicData(expen, categories)
 
-            expenses.createChart(categories, expen, user, image)
+            expenses.createChart(categories, expen, user, image, age, city)
 
             msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
             bot.register_next_step_handler(msg, on_section_click)

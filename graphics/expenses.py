@@ -20,8 +20,8 @@ from datetime import datetime, date, timedelta
 from Tkinter import Tk, Canvas
 from PIL import ImageTk, Image, ImageDraw
 
-def createChart(categories, average, user, imagePath):
-    createPlot(categories, average, user)
+def createChart(categories, average, user, imagePath, age, city):
+    createPlot(categories, average, user, age, city)
     size = (800,600)
     print imagePath
     image = Image.open(imagePath)
@@ -43,7 +43,7 @@ def createChart(categories, average, user, imagePath):
     print ("success")
 
 
-def createPlot(categories, average, user):
+def createPlot(categories, average, user, age, city):
     groups = len(categories)
 
     fig, ax = plt.subplots()
@@ -68,6 +68,14 @@ def createPlot(categories, average, user):
 
     plt.xlabel('Expenses')
     plt.ylabel('Category')
+    title = "" + age + "-year old from ";
+    if city == 1:
+        title = title + "Moscow"
+    elif city == 2:
+        title = title + "Saint Petersburg"
+    elif city == 2:
+        title = title + "Perm"
+    plt.title(title)
 
     plt.xticks(index + bar_width, categories)
     plt.legend()
