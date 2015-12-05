@@ -60,7 +60,7 @@ def createChart(currencyTitle, days, ticks, isMagic):
     plt.xlabel(currencyTitle)
     fig.autofmt_xdate()
 
-    fig.savefig("filename123", transparent=True)
+    fig.savefig("filename", transparent=True)
     plt.close(fig)
 
     if isMagic:
@@ -69,10 +69,14 @@ def createChart(currencyTitle, days, ticks, isMagic):
         background = Image.open("currencyPositive.png")
 
     background = background.resize(size, Image.ANTIALIAS)
-    overlay = Image.open("filename123.png")
+    overlay = Image.open("filename.png")
     mask = Image.new("RGBA", size, color=(255,255,255,150))
 
     background.paste(mask, (0, 0), mask)
     background.paste(overlay, (0, 0), overlay)
-    background.save("filename123.png","PNG")
+    background.save("filename.png","PNG")
     print ("success")
+
+ass = Asset(1)
+dates, rate = ass.get_timeseries("AdjClose")
+createChartWeek("test", dates, rate)
