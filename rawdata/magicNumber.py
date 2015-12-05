@@ -2,6 +2,8 @@ import random
 import os
 import sys
 
+rightImageFileName = "1.png"
+
 def getRandomNumber(original):
     random.seed()
     offset = original * 0.3
@@ -19,13 +21,16 @@ def createMagicData(original, categoryName):
     magicData = []
     positiveData = []
 
+    i = 0
     for item in original:
         magicItem, isPic = getRandomNumber(item)
         magicData.append(magicItem)
         isPositive = magicItem > (item * 1.2)
         positiveData.append(isPositive)
         if isPic:
-            rightImageFileName = getImageFileName(categoryName)
+            global rightImageFileName
+            rightImageFileName = getImageFileName(categoryName[i])
+	i += 1
 
     i = 0;
     for item in original:
