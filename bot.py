@@ -31,7 +31,6 @@ def handle_start(message):
         bot.register_next_step_handler(msg, on_section_click)
 
 def on_section_click(message):
-	#ast = Asset(1)
 	asset_list = asset.get_assets_names()
 	print asset_list
 
@@ -50,25 +49,26 @@ def on_currency_click(message):
         if message.text == u'Назад':
             handle_start(message)
         elif message.text == u'USD/RUB за неделю':
-            createAndShowChart(message,1, True, "USD/RUB")
+            createAndShowChart(message, 1, True, "USD/RUB")
         elif message.text == u'EUR/RUB за неделю':
             createAndShowChart(message, 2, True, "EUR/RUB")
         elif message.text == u'USD/RUB за год':
             createAndShowChart(message, 1, False, "USD/RUB")
         elif message.text == u'EUR/RUB за год':
-            createAndShowChart(message,2, False, "EUR/RUB")
+            createAndShowChart(message, 2, False, "EUR/RUB")
 
-def createAndShowChart(message,index, isWeek, name):
+def createAndShowChart(message, index, isWeek, title):
     res = asset.get_asset_quotes(index)
     days = sorted(res.keys())
     ticks = []
     for item in days:
         ticks.append(res.get(item).get('AdjClose'))
 
-    if (isWeek):
-        currency.createChartWeek("EUR/RUB", days, ticks)
+    if isWeek == True:
+        currency.createChartWeek(title, days, ticks)
     else:
-        currency.createChart("EUR/RUB", days, ticks)
+        currency.createChart(title, days, ticks)
+
     msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
     bot.register_next_step_handler(msg, on_currency_click)
 

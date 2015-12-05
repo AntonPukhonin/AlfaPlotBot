@@ -81,7 +81,7 @@ def drawGraph(days, values, filename):
     plt.close(fig)
     return filename
 
-def createChartWeek(currencyTitle, days, ticks):
+def createChartWeek(title, days, ticks):
     currentDay = days[0];
     rightDays = []
     rightTicks = []
@@ -93,7 +93,7 @@ def createChartWeek(currencyTitle, days, ticks):
             rightTicks.append(ticks[i])
         i = i + 1
 
-    createChart(currencyTitle, rightDays, rightTicks)
+    createChart(title, rightDays, rightTicks)
 
 def checkIncreasingFunction(ticks):
     first = ticks[0]
@@ -101,7 +101,7 @@ def checkIncreasingFunction(ticks):
     return last > first
 
 def createChart(currencyTitle, days, ticks):
-    size = (800,600)
+    size = (800, 600)
     fig, ax = plt.subplots()
     plt.plot(days, ticks)
     plt.xlabel(currencyTitle)
