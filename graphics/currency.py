@@ -30,7 +30,7 @@ from Tkinter import Tk, Canvas
 from PIL import ImageTk, Image, ImageDraw
 
 def createChartWeek(title, days, ticks):
-    currentDay = days[0];
+    currentDay = days[len(days) - 1];
     rightDays = []
     rightTicks = []
 
@@ -40,34 +40,39 @@ def createChartWeek(title, days, ticks):
             rightDays.append(day)
             rightTicks.append(ticks[i])
         i = i + 1
+    print len(days)
+    print len(rightDays)
 
-    createChart(title, rightDays, rightTicks)
+    createChart(title, rightDays, rightTicks, False)
 
 def checkIncreasingFunction(ticks):
     first = ticks[0]
     last = ticks[len(ticks) - 1]
     return last > first
 
-def createChart(currencyTitle, days, ticks):
+def createChart2(currencyTitle, days, ticks):
+    createChart(currencyTitle, days, ticks, False)
+
+def createChart(currencyTitle, days, ticks, isMagic):
     size = (800, 600)
     fig, ax = plt.subplots()
     plt.plot(days, ticks)
     plt.xlabel(currencyTitle)
     fig.autofmt_xdate()
 
-    fig.savefig("filename", transparent=True)
+    fig.savefig("filename123", transparent=True)
     plt.close(fig)
 
-    if checkIncreasingFunction(ticks):
-        background = Image.open("currencyPositive.png")
-    else:
+    if isMagic:
         background = Image.open("currencyNegative.png")
+    else:
+        background = Image.open("currencyPositive.png")
 
     background = background.resize(size, Image.ANTIALIAS)
-    overlay = Image.open("filename.png")
+    overlay = Image.open("filename123.png")
     mask = Image.new("RGBA", size, color=(255,255,255,150))
 
     background.paste(mask, (0, 0), mask)
     background.paste(overlay, (0, 0), overlay)
-    background.save("filename.png","PNG")
+    background.save("filename123.png","PNG")
     print ("success")
