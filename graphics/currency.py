@@ -57,7 +57,7 @@ def createChart(currencyTitle, days, ticks, isMagic):
     size = (800, 600)
     fig, ax = plt.subplots()
     plt.plot(days, ticks)
-    plt.xlabel(currencyTitle)
+    plt.title(currencyTitle)
     fig.autofmt_xdate()
 
     fig.savefig("filename", transparent=True)

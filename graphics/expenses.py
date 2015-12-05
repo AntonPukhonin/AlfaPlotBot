@@ -44,46 +44,50 @@ def createChart(categories, average, user, imagePath, age, city):
 
 
 def createPlot(categories, average, user, age, city):
-    groups = len(categories)
+    try:
+      groups = len(categories)
 
-    fig, ax = plt.subplots()
+      fig, ax = plt.subplots()
 
-    index = np.arange(groups)
-    bar_width = 0.35
+      index = np.arange(groups)
+      bar_width = 0.35
+	
+      opacity = 0.6
+      error_config = {'ecolor': '0.3'}
 
-    opacity = 0.6
-    error_config = {'ecolor': '0.3'}
-
-    rects1 = plt.bar(index, average, bar_width,
+      rects1 = plt.bar(index, average, bar_width,
                      alpha=opacity,
                      color='b',
                      error_kw=error_config,
                      label='Average for the region')
 
-    rects2 = plt.bar(index + bar_width, user, bar_width,
+      rects2 = plt.bar(index + bar_width, user, bar_width,
                      alpha=opacity,
                      color='r',
                      error_kw=error_config,
                      label='Your expenses')
 
-    plt.xlabel('Expenses')
-    plt.ylabel('Category')
-    title = "" + age + "-year old from ";
-    if city == 1:
-        title = title + "Moscow"
-    elif city == 2:
-        title = title + "Saint Petersburg"
-    elif city == 2:
-        title = title + "Perm"
-    plt.title(title)
+      plt.xlabel('Expenses')
+      plt.ylabel('Category')
+      title = "" + str(age) + "-year old from ";
+      if city == 1:
+          title = title + "Moscow"
+      elif city == 2:
+          title = title + "Saint Petersburg"
+      elif city == 3:
+          title = title + "Perm"
+      print title
+      plt.title(title)
+      
+      plt.xticks(index + bar_width, categories)
+      plt.legend()
 
-    plt.xticks(index + bar_width, categories)
-    plt.legend()
+      fig.autofmt_xdate()
 
-    fig.autofmt_xdate()
-
-    fig.savefig("filename", transparent=True)
-    plt.close(fig)
+      fig.savefig("filename", transparent=True)
+      plt.close(fig)
+    except IndexError:
+      print "ERROR!!!!!"
 
 #categories, expancies = mockChart.get_chart(1, 2)
 #createChart(categories, expancies, expancies, "1.png")
