@@ -15,6 +15,9 @@ sys.path.insert(0, path)
 import asset
 from datetime import datetime, date, timedelta
 import currency
+import mockChart
+import expenses
+import magicNumber
 
 bot = telebot.TeleBot(config.token)
 
@@ -31,9 +34,6 @@ def handle_start(message):
         bot.register_next_step_handler(msg, on_section_click)
 
 def on_section_click(message):
-	asset_list = asset.get_assets_names()
-	print asset_list
-
         if message.text == u'Курсы':
                 markup = types.ReplyKeyboardMarkup(selective=False)
                 markup.row('Назад')
@@ -42,7 +42,12 @@ def on_section_click(message):
                 msg = bot.send_message(message.chat.id, "Выберите актив:", reply_markup=markup)
                 bot.register_next_step_handler(msg, on_currency_click)
         elif message.text == u'Траты':
-                msg = bot.send_photo(message.chat.id, open('temp.jpg', 'rb'))
+                categories, expen = mockChart.get_chart(0, 0)
+                user = magicNumber.createMagicData(expen, categories)
+
+                expenses.createChart(categories, expen, user)
+
+                msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
                 bot.register_next_step_handler(msg, on_section_click)
 
 def on_currency_click(message):

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
-import alphaComposite
 
 path = os.getcwd()
 sys.path.insert(0, path + "/rawdata")
