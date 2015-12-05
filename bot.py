@@ -37,8 +37,8 @@ def on_section_click(message):
         if message.text == u'Курсы':
                 markup = types.ReplyKeyboardMarkup(selective=False)
                 markup.row('Назад')
-                markup.row('USD/RUB за неделю', 'EUR/RUB за неделю')
-                markup.row('USD/RUB за год', 'EUR/RUB за год')
+                markup.row('SBER за неделю', 'EUR/RUB за неделю')
+                markup.row('SBER за год', 'EUR/RUB за год')
                 msg = bot.send_message(message.chat.id, "Выберите актив:", reply_markup=markup)
                 bot.register_next_step_handler(msg, on_currency_click)
         elif message.text == u'Траты':
@@ -48,12 +48,12 @@ def on_section_click(message):
 def on_currency_click(message):
         if message.text == u'Назад':
             handle_start(message)
-        elif message.text == u'USD/RUB за неделю':
-            createAndShowChart(message, 1, True, "USD/RUB")
+        elif message.text == u'SBER за неделю':
+            createAndShowChart(message, 1, True, "SBER")
         elif message.text == u'EUR/RUB за неделю':
             createAndShowChart(message, 2, True, "EUR/RUB")
-        elif message.text == u'USD/RUB за год':
-            createAndShowChart(message, 1, False, "USD/RUB")
+        elif message.text == u'SBER за год':
+            createAndShowChart(message, 1, False, "SBER")
         elif message.text == u'EUR/RUB за год':
             createAndShowChart(message, 2, False, "EUR/RUB")
 
@@ -67,9 +67,9 @@ def createAndShowChart(message, index, isWeek, title):
     if isWeek == True:
         currency.createChartWeek(title, days, ticks)
     elif index == 1:#HardCode
-        currency.createChartWeek(title, days, ticks, TRUE)
+        currency.createChart(title, days, ticks, True)
     else:
-        currency.createChart(title, days, ticks)
+        currency.createChart2(title, days, ticks)
 
     msg = bot.send_photo(message.chat.id, open('filename123.png', 'rb'))
     bot.register_next_step_handler(msg, on_currency_click)

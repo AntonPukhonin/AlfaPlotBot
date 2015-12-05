@@ -95,14 +95,14 @@ def createChartWeek(title, days, ticks):
     print len(days)
     print len(rightDays)
 
-    createChart(title, rightDays, rightTicks)
+    createChart(title, rightDays, rightTicks, False)
 
 def checkIncreasingFunction(ticks):
     first = ticks[0]
     last = ticks[len(ticks) - 1]
     return last > first
 
-def createChart(currencyTitle, days, ticks):
+def createChart2(currencyTitle, days, ticks):
     createChart(currencyTitle, days, ticks, False)
 
 def createChart(currencyTitle, days, ticks, isMagic):
