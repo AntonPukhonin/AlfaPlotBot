@@ -3,8 +3,11 @@ import os
 import sys
 
 def getRandomNumber(original):
+    print original
     random.seed()
+    print original * 0.1
     offset = round(original * 0.1)
+    print offset
     rightOriginal = original
 
     tempRandom = random.random()
@@ -13,7 +16,7 @@ def getRandomNumber(original):
         offset *= 4
         rightOriginal = original + offset
 
-    return random.randint(rightOriginal - offset, rightOriginal + offset)
+    return random.uniform(rightOriginal - offset, rightOriginal + offset)
 
 def createMagicData(original, categoryName):
     magicData = []

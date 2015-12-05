@@ -15,7 +15,7 @@ sys.path.insert(0, path)
 import asset
 from datetime import datetime, date, timedelta
 import currency
-import mockChart
+import chart
 import expenses
 import magicNumber
 
@@ -38,12 +38,12 @@ def on_section_click(message):
         if message.text == u'Курсы валют':
             markup = types.ReplyKeyboardMarkup(selective=False)
             markup.row('Назад')
-            markup.row('ESD/RUB за неделю', 'EUR/RUB за неделю')
-            markup.row('ESD/RUB за год', 'EUR/RUB за год')
+            markup.row('USD/RUB за год', 'EUR/RUB за неделю')
+            markup.row('USD/RUB за год', 'EUR/RUB за год')
             msg = bot.send_message(message.chat.id, "Выберите актив:", reply_markup=markup)
             bot.register_next_step_handler(msg, on_currency_click)
         elif message.text == u'Финансы':
-            categories, expen = mockChart.get_chart(0, 0)
+            expen, categories = chart.get_chart(1, 20)
             user = magicNumber.createMagicData(expen, categories)
 
             expenses.createChart(categories, expen, user)
@@ -53,7 +53,7 @@ def on_section_click(message):
         elif message.text == u'Акции':
             markup = types.ReplyKeyboardMarkup(selective=False)
             markup.row('Назад')
-            markup.row('SBER за неделю', 'SBER за неделю')
+            markup.row('SBER за год', 'SBER за неделю')
             msg = bot.send_message(message.chat.id, "Выберите период:", reply_markup=markup)
             bot.register_next_step_handler(msg, on_stock_click)
 
@@ -65,9 +65,9 @@ def on_currency_click(message):
             createAndShowChart(message, 2, True, "EUR/RUB")
         elif message.text == u'EUR/RUB за год':
             createAndShowChart(message, 2, False, "EUR/RUB")
-        elif message.text == u'ESD/RUB за неделю':
+        elif message.text == u'USD/RUB за неделю':
             createAndShowChart(message, 1, True, "EUR/RUB")
-        elif message.text == u'ESD/RUB за год':
+        elif message.text == u'USD/RUB за год':
             createAndShowChart(message, 1, False, "EUR/RUB")
 
 def on_stock_click(message):
