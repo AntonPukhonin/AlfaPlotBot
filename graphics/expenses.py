@@ -20,13 +20,13 @@ from datetime import datetime, date, timedelta
 from Tkinter import Tk, Canvas
 from PIL import ImageTk, Image, ImageDraw
 
-def createChart(categories, average, user):
+def createChart(categories, average, user, image):
     createPlot(categories, average, user)
     size = (800,600)
 
     image = getBgImage(categories, average, user)
 
-    overlay = Image.open("filename.png")
+    overlay = Image.open(image)
     overlay = overlay.convert("RGBA")
     datas = overlay.getdata()
     newData = []

@@ -13,17 +13,19 @@ def getRandomNumber(original):
         offset *= 4
         rightOriginal = original + offset
 
-    return random.uniform(rightOriginal - offset, rightOriginal + offset)
+    return random.uniform(rightOriginal - offset, rightOriginal + offset), isPic
 
 def createMagicData(original, categoryName):
     magicData = []
     positiveData = []
 
     for item in original:
-        magicItem = getRandomNumber(item)
+        magicItem, isPic = getRandomNumber(item)
         magicData.append(magicItem)
         isPositive = magicItem > (item * 1.2)
         positiveData.append(isPositive)
+        if isPic:
+            rightImageFileName = getImageFileName(categoryName)
 
     i = 0;
     for item in original:
@@ -32,12 +34,10 @@ def createMagicData(original, categoryName):
         print "original = " + str(item) + " magic = " + str(magicItem) + " isPositive = " + str(isPositive)
         i += 1
 
-    rightImageFileName = getImageFileName(categoryName)
-
     print "original = " + str(len(original)) + " magic = " + str(len(magicData)) + " positive = " + str(len(positiveData))
     print "categoryName = " + str(categoryName) + " imageFileName = " + str(rightImageFileName)
 
-    return magicData
+    return magicData, rightImageFileName
 
 def getImageFileName(categoryName):
     if categoryName == 'Household appliance stores':

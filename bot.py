@@ -44,9 +44,9 @@ def on_section_click(message):
             bot.register_next_step_handler(msg, on_currency_click)
         elif message.text == u'Финансы':
             expen, categories = chart.get_chart(1, 20)
-            user = magicNumber.createMagicData(expen, categories)
+            user, image = magicNumber.createMagicData(expen, categories)
 
-            expenses.createChart(categories, expen, user)
+            expenses.createChart(categories, expen, user, image)
 
             msg = bot.send_photo(message.chat.id, open('filename.png', 'rb'))
             bot.register_next_step_handler(msg, on_section_click)
