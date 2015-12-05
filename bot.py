@@ -50,15 +50,15 @@ def on_currency_click(message):
         if message.text == u'Назад':
             handle_start(message)
         elif message.text == u'USD/RUB за неделю':
-            createAndShowChart(1, True, "USD/RUB")
+            createAndShowChart(message,1, True, "USD/RUB")
         elif message.text == u'EUR/RUB за неделю':
-            createAndShowChart(2, True, "EUR/RUB")
+            createAndShowChart(message, 2, True, "EUR/RUB")
         elif message.text == u'USD/RUB за год':
-            createAndShowChart(1, False, "USD/RUB")
+            createAndShowChart(message, 1, False, "USD/RUB")
         elif message.text == u'EUR/RUB за год':
-            createAndShowChart(2, False, "EUR/RUB")
+            createAndShowChart(message,2, False, "EUR/RUB")
 
-def createAndShowChart(index, isWeek, name):
+def createAndShowChart(message,index, isWeek, name):
     res = asset.get_asset_quotes(index)
     days = sorted(res.keys())
     ticks = []
@@ -76,15 +76,6 @@ def createAndShowChart(index, isWeek, name):
 @bot.message_handler(func=lambda message: True, content_types=['location'])
 def listener_location(message):
     bot.send_message(message.chat.id, "I's location")
-
-@bot.message_handler(func=lambda message: message.text == u'Философия')
-def go_philosophy(message):
-    ast = Asset(1)
-    days, ticks = ast.get_timeseries("AdjClose")
-    currency.example2(days, ticks)
-    bot.send_photo(message.chat.id, open('filename.png', 'rb'))
-    # bot.send_message(message.chat.id, '*В чём смысл жизни? Что я здесь делаю?*', parse_mode='Markdown')
-
 
 if __name__ == '__main__':
         os.environ['http_proxy'] = 'http://datahub-20:8888'

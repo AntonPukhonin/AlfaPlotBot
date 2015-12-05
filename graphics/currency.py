@@ -93,7 +93,7 @@ def createChartWeek(currencyTitle, days, ticks):
             rightTicks.append(ticks[i])
         i = i + 1
 
-    example(currencyTitle, rightDays, rightTicks)
+    createChart(currencyTitle, rightDays, rightTicks)
 
 def checkIncreasingFunction(ticks):
     first = ticks[0]
@@ -123,7 +123,3 @@ def createChart(currencyTitle, days, ticks):
     background.paste(overlay, (0, 0), overlay)
     background.save("filename.png","PNG")
     print ("success")
-
-ast = Asset(1)
-days, ticks = ast.get_timeseries("AdjClose")
-example("USD/RUR", days, ticks)
