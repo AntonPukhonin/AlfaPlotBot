@@ -29,7 +29,63 @@ from datetime import datetime, date, timedelta
 from Tkinter import Tk, Canvas
 from PIL import ImageTk, Image, ImageDraw
 
+<<<<<<< HEAD
 def createChartWeek(currencyTitle, days, ticks):
+=======
+def drawGraph(days, values, filename):
+    years = mdates.YearLocator()   # every year
+    months = mdates.MonthLocator()  # every month
+    yearsFmt = mdates.DateFormatter('%Y')
+
+    # load a numpy record array from yahoo csv data with fields date,
+    # open, close, volume, adj_close from the mpl-data/example directory.
+    # The record array stores python datetime.date as an object array in
+    # the date column
+    datafile = cbook.get_sample_data('goog.npy')
+    try:
+        # Python3 cannot load python2 .npy files with datetime(object) arrays
+        # unless the encoding is set to bytes. Hovever this option was
+        # not added until numpy 1.10 so this example will only work with
+        # python 2 or with numpy 1.10 and later.
+        r = np.load(datafile, encoding='bytes').view(np.recarray)
+    except TypeError:
+        r = np.load(datafile).view(np.recarray)
+
+    fig, ax = plt.subplots()
+    ax.plot(r.date, r.adj_close)
+
+
+    # format the ticks
+    ax.xaxis.set_major_locator(years)
+    ax.xaxis.set_major_formatter(yearsFmt)
+    ax.xaxis.set_minor_locator(months)
+
+    datemin = datetime.date(r.date.min().year, 1, 1)
+    datemax = datetime.date(r.date.max().year + 1, 1, 1)
+    ax.set_xlim(datemin, datemax)
+
+
+    # format the coords message box
+    def price(x):
+        return '$%1.2f' % x
+
+
+    ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
+    ax.format_ydata = price
+    ax.grid(True)
+
+    # rotates and right aligns the x labels, and moves the bottom of the
+    # axes up to make room for them
+    fig.autofmt_xdate()
+
+    print ("success")
+
+    fig.savefig(filename)
+    plt.close(fig)
+    return filename
+
+def createChartWeek(title, days, ticks):
+>>>>>>> 95883559ef6e28a32eb8bbfab82627bdab02993b
     currentDay = days[0];
     rightDays = []
     rightTicks = []
@@ -41,7 +97,7 @@ def createChartWeek(currencyTitle, days, ticks):
             rightTicks.append(ticks[i])
         i = i + 1
 
-    example(currencyTitle, rightDays, rightTicks)
+    createChart(title, rightDays, rightTicks)
 
 def checkIncreasingFunction(ticks):
     first = ticks[0]
@@ -49,7 +105,7 @@ def checkIncreasingFunction(ticks):
     return last > first
 
 def createChart(currencyTitle, days, ticks):
-    size = (800,600)
+    size = (800, 600)
     fig, ax = plt.subplots()
     plt.plot(days, ticks)
     plt.xlabel(currencyTitle)
@@ -71,7 +127,3 @@ def createChart(currencyTitle, days, ticks):
     background.paste(overlay, (0, 0), overlay)
     background.save("filename.png","PNG")
     print ("success")
-
-ast = Asset(1)
-days, ticks = ast.get_timeseries("AdjClose")
-example("USD/RUR", days, ticks)
